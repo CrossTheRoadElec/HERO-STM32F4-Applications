@@ -565,6 +565,7 @@ static void SystemClockConfig_STOP(void)
   * @param  GPIO_Pin
   * @retval None
   */
+#if 0 /* porting from another platform * - Ozrien */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == USER_BUTTON_PIN)
@@ -606,7 +607,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
   }
 }
-
+#endif
 /**
   * @brief  Gets Pointer Data.
   * @param  pbuf: Pointer to report

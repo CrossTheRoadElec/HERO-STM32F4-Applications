@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>STM32F429VI_HERO_USBD-FS</TargetName>
+      <TargetName>STM32F429VI_HERO-FS</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>STM32F429VI_HERO_USBD-FS\</OutputDirectory>
-          <OutputName>STM32F429VI_HERO_USBD-FS</OutputName>
+          <OutputName>STM32F429VI_HERO-FS</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -411,17 +411,45 @@
               <FileType>1</FileType>
               <FilePath>../Src/stm32f4xx_it.c</FilePath>
             </File>
+            <File>
+              <FileName>usbd_gs_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\usbd_gs_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>util.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\util.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\can.c</FilePath>
+            </File>
+            <File>
+              <FileName>dfu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\dfu.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\led.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Middlewares/STM32_USBD_Library/Class/HID</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Drivers/CMSIS</GroupName>
@@ -556,6 +584,11 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -601,7 +634,7 @@
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.1.1" condition="ARMv6_7_8-M Device">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.3.0"/>
         <targetInfos>
-          <targetInfo name="STM32F429VI_HERO_USBD-FS"/>
+          <targetInfo name="STM32F429VI_HERO-FS"/>
         </targetInfos>
       </component>
     </components>

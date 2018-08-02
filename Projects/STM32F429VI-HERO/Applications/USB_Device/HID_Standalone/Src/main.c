@@ -92,11 +92,14 @@ int main(void)
   
   while (1)
   {
+		/* link in the buffer for the HID report */
 		extern uint8_t HID_Buffer[4];
 		
+		/* move the cursor by 5 units */
 		HID_Buffer[1] = +5;
 		USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
 		
+		/* wait a bit */
     HAL_Delay(100);
     
     /* Toggle LEDs  */
@@ -104,9 +107,11 @@ int main(void)
     BSP_LED_Toggle(LED2);
     BSP_LED_Toggle(LED3);
 		
+		/* move the cursor back by 5 units */
 		HID_Buffer[1] = -5;
 		USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
 		
+		/* wait a bit */
     HAL_Delay(100); 
     
     /* Toggle LEDs  */

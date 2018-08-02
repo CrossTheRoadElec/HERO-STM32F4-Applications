@@ -33,7 +33,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 
-extern PCD_HandleTypeDef hpcd;
+extern PCD_HandleTypeDef hpcd_USB_FS;
 extern USBD_HandleTypeDef USBD_Device;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -155,7 +155,7 @@ void SysTick_Handler(void)
   */
 void OTG_FS_IRQHandler(void)
 {
-  HAL_PCD_IRQHandler(&hpcd);
+  HAL_PCD_IRQHandler(&hpcd_USB_FS);
 }
 
 /**
@@ -166,7 +166,7 @@ void OTG_FS_IRQHandler(void)
  
 void OTG_FS_WKUP_IRQHandler(void)
 {
-  if((&hpcd)->Init.low_power_enable)
+  if((&hpcd_USB_FS)->Init.low_power_enable)
   {
     /* Reset SLEEPDEEP bit of Cortex System Control Register */
     SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));  
@@ -195,7 +195,7 @@ void OTG_FS_WKUP_IRQHandler(void)
     {}
     
     /* ungate PHY clock */
-    __HAL_PCD_UNGATE_PHYCLOCK((&hpcd)); 
+    __HAL_PCD_UNGATE_PHYCLOCK((&hpcd_USB_FS)); 
   }
   /* Clear EXTI pending Bit*/
   __HAL_USB_OTG_FS_WAKEUP_EXTI_CLEAR_FLAG();
