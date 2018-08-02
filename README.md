@@ -30,3 +30,8 @@ Makes the HERO behave like a Socket CAN device.
 
 ## Issues
 The projects are relatively new and untested, issues will be monitored in the [tracker](https://github.com/CrossTheRoadElec/HERO-STM32F4/issues).
+
+## Build/Debug Procedure
+Currently the only tested method is to open the MDK-ARM/Project.uvprojx project in KEIL-uVision v5.
+Deploy/Debug was accomplished with an ST Link V2 (~$20 JTAG debugger).
+The bottom of the HERO has a JTAG port, which requires the header to be populated.
