@@ -24,9 +24,6 @@ THE SOFTWARE.
 
 */
 
-#ifndef DFU_H
-#define DFU_H
+#pragma once
 
 void dfu_run_bootloader(void);
-
-#endif

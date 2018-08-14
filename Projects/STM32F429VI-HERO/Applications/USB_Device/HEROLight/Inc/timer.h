@@ -24,13 +24,9 @@ THE SOFTWARE.
 
 */
 
-#ifndef TIMER_H
-#define TIMER_H
-
+#pragma once
 
 #include <stdint.h>
 
 void timer_init(void);
 uint32_t timer_get(void);
-
-#endif
