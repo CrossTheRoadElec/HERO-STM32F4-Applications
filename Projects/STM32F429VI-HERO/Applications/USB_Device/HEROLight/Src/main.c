@@ -31,7 +31,7 @@ THE SOFTWARE.
 #include <string.h>
 
 //#include "config.h"
-#define CAN_QUEUE_SIZE 16
+#define CAN_QUEUE_SIZE 4
 
 #include "stm32f4xx_hal.h"
 #include "usbd_def.h"
@@ -49,7 +49,7 @@ THE SOFTWARE.
 
 void SystemClock_Config(void);
 static bool send_to_host_or_enqueue(struct gs_host_frame *frame);
-static void send_to_host();
+static void send_to_host(void);
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -98,37 +98,9 @@ int main(void)
 	BSP_LED_On(LED3);
 	
 	
-#if 1 /* testing -Ozrien */
 	can_init(&hCAN, CAN1);
-	can_set_bittiming(&hCAN, 2, 7 + 8, 5, 4);
-	can_enable(&hCAN, 0, 0, 0);
-#elif 0
-	can_init(&hCAN, CAN1);
-	//bool can_set_bittiming(can_data_t *hcan, uint16_t brp, uint8_t phase_seg1, uint8_t phase_seg2, uint8_t sjw);
 	can_disable(&hCAN);
-	can_enable(&hCAN, 0, 0, 0);
-	can_disable(&hCAN);
-	can_set_bittiming(&hCAN, 2, 7 + 8, 5, 4);
-	can_enable(&hCAN, 0, 0, 0);
-		can_disable(&hCAN);
-	can_set_bittiming(&hCAN, 1, 1, 1, 1);
-	can_enable(&hCAN, 0, 0, 0);
-		can_disable(&hCAN);
-	can_set_bittiming(&hCAN, 1, 1, 1, 1);
-	can_enable(&hCAN, 0, 0, 0);
-		can_disable(&hCAN);
-	can_set_bittiming(&hCAN, 1, 1, 1, 1);
-	can_enable(&hCAN, 0, 0, 0);
-#else
-	can_disable(&hCAN);
-#endif
 
-#if 0
-	flash_load();
-
-	gpio_init();
-
-#endif
 	led_init(&hLED,
 					LED1_GPIO_PORT, LED1_PIN, false, 
 					LED2_GPIO_PORT, LED2_PIN, false);
@@ -155,15 +127,7 @@ int main(void)
 #ifdef CAN_S_GPIO_Port
 	HAL_GPIO_WritePin(CAN_S_GPIO_Port, CAN_S_Pin, GPIO_PIN_RESET);
 #endif
-    
-//	while (1) {
-//		BSP_LED_Toggle(LED1);
-//		BSP_LED_Toggle(LED2);
-//		BSP_LED_Toggle(LED3);
-//    HAL_Delay(100); 
-//	}
-	
-		
+    		
 	while (1) {
 		
 		/* additional loop blink */
@@ -173,11 +137,6 @@ int main(void)
 		if (time_dur < 0 || time_dur > 500e3) {
 			BSP_LED_Toggle(LED3);
 			time0_us = time1_us;
-			struct gs_host_frame testFrame = {0};
-			testFrame.can_id = 0x456;
-			testFrame.can_dlc = 8;
-			testFrame.data[0] = 0x55;
-			can_send(&hCAN, &testFrame);
 		}
 		
 		struct gs_host_frame *frame = queue_pop_front(q_from_host);
@@ -207,7 +166,7 @@ int main(void)
 				frame->channel = 0;
 				frame->flags = 0;
 				frame->reserved = 0;
-
+				
 				send_to_host_or_enqueue(frame);
 
 				led_indicate_trx(&hLED, led_1);
@@ -323,7 +282,7 @@ bool send_to_host_or_enqueue(struct gs_host_frame *frame)
 	}
 }
 
-void send_to_host()
+void send_to_host(void)
 {
         struct gs_host_frame *frame = queue_pop_front(q_to_host);
 

@@ -33,7 +33,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 
-extern PCD_HandleTypeDef hpcd_USB_FS;
+extern PCD_HandleTypeDef hpcd_USB;
 extern USBD_HandleTypeDef USBD_Device;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -155,7 +155,12 @@ void SysTick_Handler(void)
   */
 void OTG_FS_IRQHandler(void)
 {
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
+  HAL_PCD_IRQHandler(&hpcd_USB);
+}
+
+void OTG_HS_IRQHandler(void)
+{
+  HAL_PCD_IRQHandler(&hpcd_USB);
 }
 
 /**
@@ -166,7 +171,7 @@ void OTG_FS_IRQHandler(void)
  
 void OTG_FS_WKUP_IRQHandler(void)
 {
-  if((&hpcd_USB_FS)->Init.low_power_enable)
+  if((&hpcd_USB)->Init.low_power_enable)
   {
     /* Reset SLEEPDEEP bit of Cortex System Control Register */
     SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));  
@@ -195,7 +200,44 @@ void OTG_FS_WKUP_IRQHandler(void)
     {}
     
     /* ungate PHY clock */
-    __HAL_PCD_UNGATE_PHYCLOCK((&hpcd_USB_FS)); 
+    __HAL_PCD_UNGATE_PHYCLOCK((&hpcd_USB)); 
+  }
+  /* Clear EXTI pending Bit*/
+  __HAL_USB_OTG_FS_WAKEUP_EXTI_CLEAR_FLAG();
+}
+
+void OTG_HS_WKUP_IRQHandler(void)
+{
+  if((&hpcd_USB)->Init.low_power_enable)
+  {
+    /* Reset SLEEPDEEP bit of Cortex System Control Register */
+    SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));  
+    
+    
+    /* Configures system clock after wake-up from STOP: enable HSE, PLL and select 
+    PLL as system clock source (HSE and PLL are disabled in STOP mode) */
+    
+    __HAL_RCC_HSE_CONFIG(RCC_HSE_ON);
+    
+    /* Wait till HSE is ready */  
+    while(__HAL_RCC_GET_FLAG(RCC_FLAG_HSERDY) == RESET)
+    {}
+    
+    /* Enable the main PLL. */
+    __HAL_RCC_PLL_ENABLE();
+    
+    /* Wait till PLL is ready */  
+    while(__HAL_RCC_GET_FLAG(RCC_FLAG_PLLRDY) == RESET)
+    {}
+    
+    /* Select PLL as SYSCLK */
+    MODIFY_REG(RCC->CFGR, RCC_CFGR_SW, RCC_SYSCLKSOURCE_PLLCLK);
+    
+    while (__HAL_RCC_GET_SYSCLK_SOURCE() != RCC_CFGR_SWS_PLL)
+    {}
+    
+    /* ungate PHY clock */
+    __HAL_PCD_UNGATE_PHYCLOCK((&hpcd_USB)); 
   }
   /* Clear EXTI pending Bit*/
   __HAL_USB_OTG_FS_WAKEUP_EXTI_CLEAR_FLAG();

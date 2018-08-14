@@ -26,4 +26,7 @@ THE SOFTWARE.
 
 #pragma once
 
-void dfu_run_bootloader();
+#include <stdint.h>
+
+void timer_init(void);
+uint32_t timer_get(void);

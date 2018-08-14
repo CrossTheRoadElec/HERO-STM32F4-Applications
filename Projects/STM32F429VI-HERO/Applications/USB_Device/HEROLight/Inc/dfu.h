@@ -24,27 +24,6 @@ THE SOFTWARE.
 
 */
 
-#include "timer.h"
-#include "stm32f4xx_hal.h"
+#pragma once
 
-void timer_init()
-{
-	__HAL_RCC_TIM2_CLK_ENABLE();
-
-	TIM2->CR1 = 0;
-	TIM2->CR2 = 0;
-	TIM2->SMCR = 0;
-	TIM2->DIER = 0;
-	TIM2->CCMR1 = 0;
-	TIM2->CCMR2 = 0;
-	TIM2->CCER = 0;
-	TIM2->PSC = 168/2-1;
-	TIM2->ARR = 0xFFFFFFFF;
-	TIM2->CR1 |= TIM_CR1_CEN;
-	TIM2->EGR = TIM_EGR_UG;
-}
-
-uint32_t timer_get()
-{
-	return TIM2->CNT;
-}
+void dfu_run_bootloader(void);

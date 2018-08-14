@@ -28,7 +28,6 @@ THE SOFTWARE.
 volatile uint32_t pclk1 ;
 void can_init(can_data_t *hcan, CAN_TypeDef *instance)
 {
-#if 1
 	__HAL_RCC_CAN1_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
@@ -47,7 +46,6 @@ void can_init(can_data_t *hcan, CAN_TypeDef *instance)
 	hcan->phase_seg1 = 7+8;
 	hcan->phase_seg2 = 5;
 	hcan->sjw        = 4;
-#endif
 }
 
 bool can_set_bittiming(can_data_t *hcan, uint16_t brp, uint8_t phase_seg1, uint8_t phase_seg2, uint8_t sjw)
@@ -76,7 +74,6 @@ bool can_set_bittiming(can_data_t *hcan, uint16_t brp, uint8_t phase_seg1, uint8
 
 void can_enable(can_data_t *hcan, bool loop_back, bool listen_only, bool one_shot)
 {
-#if 1
 	CAN_TypeDef *can = hcan->instance;
 
 	uint32_t mcr = CAN_MCR_INRQ
@@ -118,7 +115,6 @@ void can_enable(can_data_t *hcan, bool loop_back, bool listen_only, bool one_sho
 	can->FA1R |= filter_bit;         // enable filter
 	can->FMR &= ~CAN_FMR_FINIT;
 
-#endif
 }
 
 void can_disable(can_data_t *hcan)
@@ -198,7 +194,6 @@ static CAN_TxMailBox_TypeDef *can_find_free_mailbox(can_data_t *hcan)
 
 bool can_send(can_data_t *hcan, struct gs_host_frame *frame)
 {
-#if 1
 	CAN_TxMailBox_TypeDef *mb = can_find_free_mailbox(hcan);
 	if (mb != 0) {
 
@@ -234,10 +229,7 @@ bool can_send(can_data_t *hcan, struct gs_host_frame *frame)
 		mb->TIR |= CAN_TI0R_TXRQ;
 
 		return true;
-	} else {
-		return false;
 	}
-#endif
 	return false;
 }
 

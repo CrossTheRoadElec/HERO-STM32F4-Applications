@@ -38,7 +38,7 @@ THE SOFTWARE.
 //static void dfu_hack_boot_pin_f042();
 //static void dfu_jump_to_bootloader();
 
-void dfu_run_bootloader()
+void dfu_run_bootloader(void)
 {
 	//dfu_reset_to_bootloader_magic = RESET_TO_BOOTLOADER_MAGIC_CODE;
 	//NVIC_SystemReset();
