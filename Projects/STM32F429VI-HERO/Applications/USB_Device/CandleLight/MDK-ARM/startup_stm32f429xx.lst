@@ -902,20 +902,19 @@ ARM Macro Assembler    Page 14
               00000000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
-erwork --depend=stm32f429vi_hero-fs\startup_stm32f429xx.d -ostm32f42
-9vi_hero_usbd-fs\startup_stm32f429xx.o -I.\RTE\_STM32F429VI_HERO-FS -IC:\
-Users\ozrien\Documents\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include -IC:\User
-s\ozrien\Documents\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Dev
-ice\ST\STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SE
-TA 1" --predefine="__UVISION_VERSION SETA 525" --predefine="_RTE_ SETA 1" --pre
+erwork --depend=stm32f429vi_hero_usbd-fs\startup_stm32f429xx.d -ostm32f429vi_he
+ro_usbd-fs\startup_stm32f429xx.o -I.\RTE\_STM32F429VI_HERO-FS -IC:\Keil_v5\ARM\
+PACK\ARM\CMSIS\5.3.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.1
+3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__EVAL SETA 1" --pre
+define="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 525" --predefine
+="_RTE_ SETA 1" --predefine="STM32F429xx SETA 1" --list=startup_stm32f429xx.lst
 
 
 
 ARM Macro Assembler    Page 15 
 
 
-define="STM32F429xx SETA 1" --list=startup_stm32f429xx.lst startup_stm32f429xx.
-s
+ startup_stm32f429xx.s
 
 
 

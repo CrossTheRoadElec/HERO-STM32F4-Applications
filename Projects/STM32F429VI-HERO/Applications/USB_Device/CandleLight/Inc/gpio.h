@@ -24,6 +24,9 @@ THE SOFTWARE.
 
 */
 
-#pragma once
+#ifndef GPIO_H
+#define GPIO_H
 
-void gpio_init();
+void gpio_init(void);
+
+#endif
