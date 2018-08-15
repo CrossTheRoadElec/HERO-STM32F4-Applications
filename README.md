@@ -6,6 +6,8 @@ This is a collection of embedded C/C++ projects targeting the STM32F on the CTRE
 Provide a firmware port of [candleLight_fw](https://github.com/HubertD/candleLight_fw).  
 Socket CAN support is part of the multi-platform build effort of Phoenix (linux-desktop/RaspPi/etc).
 This firmware allows using HERO in this fashion, however any Socket CAN compliant USB device will be supported.
+
+**Socket CAN binaries can be found** [here](https://github.com/CrossTheRoadElec/HERO-STM32F4-Applications/releases).
 ### Embedded C/C++
 To provide an "on the metal" template for embedded C/C++ developers who prefer to not use the Visual Studio C# NETMF solution.
 This allows use of the STM32F hardware features that is not exposed in NETMF-C#.
