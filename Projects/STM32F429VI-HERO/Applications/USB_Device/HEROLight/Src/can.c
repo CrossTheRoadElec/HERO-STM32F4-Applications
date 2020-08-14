@@ -50,13 +50,6 @@ void can_init(can_data_t *hcan, CAN_TypeDef *instance)
 
 bool can_set_bittiming(can_data_t *hcan, uint16_t brp, uint8_t phase_seg1, uint8_t phase_seg2, uint8_t sjw)
 {
-	/* force 1 Mbps, until we figure out how the usb host knows what the PCLK1 is */
-	brp        = 2; /* div by 2 => 21 Mhz*/
-	phase_seg1 = 7+8;
-	phase_seg2 = 5;
-	sjw        = 4;
-	
-	
 	if ( (brp>0) && (brp<=1024)
 	  && (phase_seg1>0) && (phase_seg1<=16)
 	  && (phase_seg2>0) && (phase_seg2<=8)
