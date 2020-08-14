@@ -276,7 +276,7 @@ static const struct gs_device_bt_const USBD_GS_CAN_btconst = {
 	| GS_CAN_FEATURE_IDENTIFY
 	| GS_CAN_FEATURE_USER_ID
 	| GS_CAN_FEATURE_PAD_PKTS_TO_MAX_PKT_SIZE,
-	48000000, // can timing base clock
+	42000000, // can timing base clock
 	1, // tseg1 min
 	16, // tseg1 max
 	1, // tseg2 min
